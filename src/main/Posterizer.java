@@ -1,25 +1,97 @@
 package main;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.image.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+import java.io.File;
 
 public class Posterizer {
+	private Image image;
+
+	public Scene loadScene () {
+		Button menuButton = new Button("Main Menu");
+		HBox menuButtonSection = new HBox(menuButton);
+
+		Button selectImageButton = new Button("Select image");
+		HBox imageSelect = new HBox(selectImageButton); // HBox to store the select button
+		HBox imagePreview = new HBox(); // HBox to display the image preview
+
+		Button posterize = new Button("Posterize");
+		HBox posterizeSettings = new HBox(posterize); // settings for posterizing
+
+		HBox posterizedImage = new HBox(); // HBox to display the result of posterizing
+
+		VBox vBox = new VBox(menuButtonSection, imageSelect, imagePreview, posterizeSettings, posterizedImage);
+		Scene scene = new Scene(vBox, Preferences.windowWidth, Preferences.windowHeight);
+
+		/* return to main menu if button is pressed */
+		menuButton.setOnAction(event -> Main.loadMainMenu());
+
+		/* choose file when button is pressed */
+		selectImageButton.setOnAction(event -> {
+			FileChooser imageChooser = new FileChooser();
+			imageChooser.setTitle("Select image for digitizing");
+			imageChooser.getExtensionFilters().addAll(
+					new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.bmp")
+			);
+			File selectedFile = imageChooser.showOpenDialog(new Stage());
+
+			if (selectedFile != null) {
+				image = new Image(selectedFile.toURI().toString());
+				ImageView imageView = new ImageView(image);
+				imageView.setFitHeight(Preferences.imagePreviewSize);
+				imageView.setFitWidth(Preferences.imagePreviewSize);
+				imageView.setPreserveRatio(true);
+				imagePreview.getChildren().setAll(imageView); // add the image to the image box
+			}
+			/* show an error box if they don't choose the right file type or choose an empty file */
+			else {
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("File error");
+				alert.setHeaderText("Invalid file");
+				alert.setContentText("The file you selected was not valid or you didn't select any file.");
+				alert.showAndWait();
+			}
+		});
+
+		posterize.setOnAction(event -> {
+			Posterizer posterizer = new Posterizer();
+			posterizer.setStartImage(image);
+
+			Color[] availableColors = {Color.WHITE, Color.BLACK, Color.GRAY, Color.LIGHTGRAY, Color.DARKGRAY}; // read available colors from preferences and let the user choose which ones they want
+			posterizer.setColors(availableColors);
+			Image result = posterizer.posterize();
+			ImageView imageView = new ImageView(result);
+			imageView.setFitWidth(Preferences.imagePreviewSize);
+			imageView.setFitHeight(Preferences.imagePreviewSize);
+			imageView.setPreserveRatio(true);
+			posterizedImage.getChildren().setAll(imageView);
+		});
+
+		return scene;
+	}
+
+
 	private Color[] availableColors;
 
-	public void setColors (Color[] userColors) {
+	private void setColors (Color[] userColors) {
 		availableColors = userColors;
 	}
 
 	private Image startImage;
 
-	public void setStartImage (Image image) {
+	private void setStartImage (Image image) {
 		startImage = image;
 	}
 
-	public Image posterize () {
+	private Image posterize () {
 		PixelReader pixelReader = startImage.getPixelReader(); // make a pixelReader
 
 		int width = (int) startImage.getWidth(); // get the width and height of the picture
