@@ -1,0 +1,12 @@
+.root {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Courier New";
+    -fx-padding: 10 10 10 10;
+}
+.button {
+    -fx-padding: 5 22 5 22;
+}
+GridPane {
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+}

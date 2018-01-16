@@ -1,49 +1,27 @@
 package main;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
-	private static Stage primaryStage;
+	public static Stage primaryStage;
 
 	@Override
-	public void start (Stage stage) {
-		stage.setTitle("OpenEmbroiderer");
-		stage.show();
-
+	public void start (Stage stage) throws Exception {
 		primaryStage = stage;
-		loadMainMenu();
-	}
 
-	public static void loadMainMenu () {
-		Stage stage = Main.primaryStage;
+		Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+		Scene scene = new Scene(root, Preferences.windowWidth, Preferences.windowHeight);
 
-		Button openPosterizer = new Button("Posterizer");
-		Button openDigitizer = new Button("Digitizer");
-		Button openPreferences = new Button("Preferences");
-		VBox menuButtons = new VBox(openPosterizer, openDigitizer, openPreferences);
+		stage.setWidth(Preferences.windowWidth);
+		stage.setHeight(Preferences.windowHeight);
 
-		Scene scene = new Scene(menuButtons, Preferences.windowWidth, Preferences.windowHeight);
+		stage.setTitle("OpenEmbroiderer");
 		stage.setScene(scene);
-
-		openPosterizer.setOnAction(event -> {
-			Posterizer posterizer = new Posterizer();
-			stage.setScene(posterizer.loadScene());
-		});
-
-		openDigitizer.setOnAction(event -> {
-			Digitizer digitizer = new Digitizer();
-			stage.setScene(digitizer.loadScene());
-		});
-
-		openPreferences.setOnAction(event -> {
-			Preferences preferences = new Preferences();
-			stage.setScene(preferences.loadScene());
-		});
+		stage.show();
 	}
 
 	public static void main (String[] args) {
