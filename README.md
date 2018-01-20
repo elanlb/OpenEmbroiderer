@@ -1,2 +1,2 @@
-# OpenEmbroiderer
-JavaFX based image to tool path program for computerized embroidery machines.
+# color-matcher
+JavaFX based program to reduce the colors in an image. More details will come soon.
