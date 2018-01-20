@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="main.ColorMatcher"
+          stylesheets="@css/stylesheet.css">
+
+    <Button text="Main Menu" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#mainMenu"/>
+
+    <Button text="Select Colors" GridPane.columnIndex="0" GridPane.rowIndex="1" onAction="#selectColors"/>
+
+    <Button text="Select File" GridPane.columnIndex="0" GridPane.rowIndex="2" onAction="#selectFile"/>
+    <ImageView fx:id="imagePreview" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+    <Button text="Match Colors" GridPane.columnIndex="0" GridPane.rowIndex="3" onAction="#matchColors"/>
+    <ImageView fx:id="imageResultView" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+    <Button text="Save File" GridPane.columnIndex="0" GridPane.rowIndex="4" onAction="#saveFile"/>
+</GridPane>

@@ -12,4 +12,5 @@
     <Label text="OpenEmbroiderer" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"/>
     <Button text="Posterizer" GridPane.columnIndex="0" GridPane.rowIndex="1" onAction="#loadPosterizer"/>
     <Button text="Digitizer" GridPane.columnIndex="0" GridPane.rowIndex="2" onAction="#loadDigitizer"/>
+    <Button text="Quit" GridPane.columnIndex="0" GridPane.rowIndex="3" onAction="#quit"/>
 </GridPane>

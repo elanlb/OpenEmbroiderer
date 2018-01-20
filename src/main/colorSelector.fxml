@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="main.ColorSelector"
+          stylesheets="@css/stylesheet.css">
+
+    <Button text="Close Window" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <TextField fx:id="filterField" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+
+    <TableView fx:id="colorTableView">
+        <columns>
+            <TableColumn fx:id="selectorColumn"/>
+            <TableColumn fx:id="nameColumn" text="Color"/>
+            <TableColumn fx:id="colorPreviewColumn" text="Preview"/>
+        </columns>
+    </TableView>
+</GridPane>

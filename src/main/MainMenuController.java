@@ -1,5 +1,6 @@
 package main;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +11,7 @@ public class MainMenuController {
 
 	@FXML
 	protected void loadPosterizer (ActionEvent event) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("posterizer.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("colorMatcher.fxml"));
 
 		Main.primaryStage.setScene(new Scene(root));
 	}
@@ -18,5 +19,10 @@ public class MainMenuController {
 	@FXML
 	protected void loadDigitizer (ActionEvent event) {
 
+	}
+
+	@FXML
+	protected void quit (ActionEvent event) {
+		Platform.exit();
 	}
 }
