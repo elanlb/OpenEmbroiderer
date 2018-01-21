@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="color_matcher.jnlp">
+    <information>
+        <title>Color Matcher</title>
+        <vendor>Elan Bustos</vendor>
+        <description>none</description>
+        <offline-allowed/>
+    </information>
+    <update check="background"/>
+    <resources>
+        <j2se version="9.0.1+" href="http://java.sun.com/products/autodl/j2se"/>
+        <jar href="color_matcher.jar" size="12003" download="eager"/>
+    </resources>
+    <jfx:javafx-desc width="800" height="600" main-class="main.Main" name="Main"/>
+</jnlp>
+
