@@ -9,8 +9,7 @@
           fx:controller="main.MainMenuController"
           stylesheets="@css/stylesheet.css">
 
-    <Label text="OpenEmbroiderer" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"/>
-    <Button text="Posterizer" GridPane.columnIndex="0" GridPane.rowIndex="1" onAction="#loadPosterizer"/>
-    <Button text="Digitizer" GridPane.columnIndex="0" GridPane.rowIndex="2" onAction="#loadDigitizer"/>
-    <Button text="Quit" GridPane.columnIndex="0" GridPane.rowIndex="3" onAction="#quit"/>
+    <Label text="Color Matcher" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"/>
+    <Button text="Match Colors" GridPane.columnIndex="0" GridPane.rowIndex="1" onAction="#loadPosterizer"/>
+    <Button text="Quit" GridPane.columnIndex="0" GridPane.rowIndex="2" onAction="#quit"/>
 </GridPane>

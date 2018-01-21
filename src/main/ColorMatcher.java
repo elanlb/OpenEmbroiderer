@@ -14,6 +14,7 @@ import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ColorMatcher {
 	private Image image;
@@ -28,7 +29,7 @@ public class ColorMatcher {
 
 	@FXML
 	protected void selectColors (ActionEvent event) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("colorSelector.fxml"));
+		ColorSelector.open();
 	}
 
 	/* choose file when button is pressed and display it in the preview box */
@@ -61,55 +62,58 @@ public class ColorMatcher {
 		if (image != null) {
 			Image startImage = image;
 
-			Color[] availableColors = {
-					Color.rgb(0, 190,144),
-					Color.rgb(223, 69, 81),
-					Color.rgb(0xFF, 0xFF, 0xFF),
-					Color.rgb(215, 180, 184),
-					Color.rgb(138, 125, 100),
-					Color.rgb(0, 0, 0)
-			}; // read available colors from preferences and let the user choose which ones they want
+			if (ColorSelector.colors == null) { // make sure that colors are selected
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("No Colors");
+				alert.setHeaderText("No colors are selected");
+				alert.setContentText("You must select colors to use. Click 'Select Colors' to access the color selector.");
+				alert.showAndWait();
+			} else {
+				ArrayList<Color> availableColors = ColorSelector.colors; // read available colors from preferences and let the user choose which ones they want
 
-			PixelReader pixelReader = startImage.getPixelReader(); // make a pixelReader
+				PixelReader pixelReader = startImage.getPixelReader(); // make a pixelReader
 
-			int width = (int) startImage.getWidth(); // get the width and height of the picture
-			int height = (int) startImage.getHeight();
+				int width = (int) startImage.getWidth(); // get the width and height of the picture
+				int height = (int) startImage.getHeight();
 
-			WritableImage writableImage = new WritableImage(width, height);
-			PixelWriter pixelWriter = writableImage.getPixelWriter();
+				WritableImage writableImage = new WritableImage(width, height);
+				PixelWriter pixelWriter = writableImage.getPixelWriter();
 
-			for (int x = 0; x < width; x++) {
-				for (int y = 0; y < height; y++) {
-					/* find the distance to each available color and then set to the closest */
-					Color currentColor = pixelReader.getColor(x, y);
-					double red = currentColor.getRed();
-					double green = currentColor.getGreen();
-					double blue = currentColor.getBlue();
+				for (int x = 0; x < width; x++) {
+					for (int y = 0; y < height; y++) {
+						/* find the distance to each available color and then set to the closest */
+						Color currentColor = pixelReader.getColor(x, y);
+						double red = currentColor.getRed();
+						double green = currentColor.getGreen();
+						double blue = currentColor.getBlue();
+						double alpha = currentColor.getOpacity();
 
-					double[] distances = new double[availableColors.length]; // distances to each color based on the index
+						double[] distances = new double[availableColors.size()]; // distances to each color based on the index
 
-					for (int i = 0; i < availableColors.length; i++) {
-						double distance = Math.sqrt(
-								Math.pow(availableColors[i].getRed() - red, 2) +
-										Math.pow(availableColors[i].getGreen() - green, 2) +
-										Math.pow(availableColors[i].getBlue() - blue, 2)
-						); // pythagorean theorem in 3d
+						for (int i = 0; i < availableColors.size(); i++) {
+							double distance = Math.sqrt(
+									Math.pow(availableColors.get(i).getRed() - red, 2) +
+											Math.pow(availableColors.get(i).getGreen() - green, 2) +
+											Math.pow(availableColors.get(i).getBlue() - blue, 2) +
+											Math.pow(availableColors.get(i).getOpacity() - alpha, 2)
+							); // pythagorean theorem in 3d
 
-						distances[i] = distance; // set the distance of each color in the same order the colors came in
+							distances[i] = distance; // set the distance of each color in the same order the colors came in
+						}
+
+						/* get the index of the smallest distance and then get the color from the availableColors array */
+						int index = ArrayFunctions.min(distances);
+
+						pixelWriter.setColor(x, y, availableColors.get(index));
 					}
-
-					/* get the index of the smallest distance and then get the color from the availableColors array */
-					int index = ArrayFunctions.min(distances);
-
-					pixelWriter.setColor(x, y, availableColors[index]);
 				}
+
+				imageResult = writableImage;
+
+				imageResultView.setImage(writableImage);
+				imageResultView.setFitHeight(Preferences.imagePreviewSize);
+				imageResultView.setPreserveRatio(true);
 			}
-
-			imageResult = writableImage;
-
-			imageResultView.setImage(writableImage);
-			imageResultView.setFitHeight(Preferences.imagePreviewSize);
-			imageResultView.setPreserveRatio(true);
 		}
 		else {
 			Alert alert = new Alert(Alert.AlertType.ERROR);

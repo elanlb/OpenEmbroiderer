@@ -17,11 +17,6 @@ public class MainMenuController {
 	}
 
 	@FXML
-	protected void loadDigitizer (ActionEvent event) {
-
-	}
-
-	@FXML
 	protected void quit (ActionEvent event) {
 		Platform.exit();
 	}

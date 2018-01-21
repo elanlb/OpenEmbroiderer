@@ -19,7 +19,7 @@ public class Main extends Application {
 		stage.setWidth(Preferences.windowWidth);
 		stage.setHeight(Preferences.windowHeight);
 
-		stage.setTitle("OpenEmbroiderer");
+		stage.setTitle("Color Matcher");
 		stage.setScene(scene);
 		stage.show();
 	}

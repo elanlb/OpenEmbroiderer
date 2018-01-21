@@ -1,33 +1,72 @@
 package main;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ListView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class ColorSelector {
-	public Stage stage;
+import java.util.ArrayList;
+import java.util.stream.IntStream;
 
-	public void open () {
+public class ColorSelector {
+	private static Stage stage;
+
+	public static void open () throws Exception {
+		if (stage == null) {
+			stage = new Stage();
+		}
+
+		Parent root = FXMLLoader.load(ColorSelector.class.getResource("colorSelector.fxml")); // can't use getClass
+		stage.setScene(new Scene(root));
+		stage.show();
 	}
 
 	@FXML
-	private TextField filterField;
+	protected void closeWindow () {
+		stage.hide();
+	}
+
+	public static ArrayList<Color> colors;
+	private static ObservableList<ColorPicker> colorPickers; // stores the color pickers
 
 	@FXML
-	private TableView<Color> colorTableView;
+	private ListView<ColorPicker> colorPickerListView; // displays each color picker
+
+	public void initialize () {
+		if (colorPickers == null) {
+			colorPickers = FXCollections.observableArrayList();
+		}
+
+		colorPickerListView.setItems(colorPickers);
+
+		if (colors == null) {
+			colors = new ArrayList<>();
+		}
+
+		colorPickers.addListener(new ListChangeListener<>() {
+			@Override
+			public void onChanged (Change<? extends ColorPicker> c) {
+				IntStream.range(0, colorPickers.size()).forEach(i -> colors.add(colorPickers.get(i).getValue()));
+				colors.add(Color.TRANSPARENT);
+				System.out.println(colorPickers);
+			}
+		});
+	}
 
 	@FXML
-	private TableColumn<CheckBox, Boolean> selectorColumn;
+	protected void addItem () {
+		colorPickers.add(new ColorPicker());
+	}
 
 	@FXML
-	private TableColumn<String, String> nameColumn;
-
-	@FXML
-	private TableColumn<Color, Color> colorPreviewColumn;
+	protected void removeItem () {
+		colorPickers.remove(colorPickerListView.getSelectionModel().getSelectedItem());
+	}
 }

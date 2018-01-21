@@ -1,27 +1,40 @@
 package main;
 
 public class ArrayFunctions {
-	public static int min (double[] array) {
-		double smallestElement = array[0];
-		int index = 0;
+	public static int min (double[] array) throws ArrayIndexOutOfBoundsException {
+		try {
+			double smallestElement = array[0];
+			int index = 0;
 
-		for (int i = 0; i < array.length; i++) {
-			if (array[i] < smallestElement) {
-				smallestElement = array[i];
-				index = i;
+			for (int i = 0; i < array.length; i++) {
+				if (array[i] < smallestElement) {
+					smallestElement = array[i];
+					index = i;
+				}
 			}
+			return index;
 		}
-
-		return index;
+		catch (ArrayIndexOutOfBoundsException exception) {
+			return -1;
+		}
 	}
 
-	public static double max (double[] array) {
-		double largestElement = array[0];
+	public static double max (double[] array) throws ArrayIndexOutOfBoundsException {
+		try {
+			double largestElement = array[0];
+			int index = 0;
 
-		for (double element : array) {
-			largestElement = Math.min(element, largestElement);
+			for (int i = 0; i < array.length; i++) {
+				if (array[i] < largestElement) {
+					largestElement = array[i];
+					index = i;
+				}
+			}
+
+			return index;
 		}
-
-		return largestElement;
+		catch (ArrayIndexOutOfBoundsException exception) {
+			return -1;
+		}
 	}
 }
