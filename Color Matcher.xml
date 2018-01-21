@@ -279,6 +279,8 @@
     <copy todir="${artifact.temp.output.color_matcher}">
       <fileset dir="${color-matcher.output.dir}"/>
     </copy>
+    <mkdir dir="${artifact.temp.output.color_matcher}/META-INF"/>
+    <copy file="${basedir}/META-INF/MANIFEST.MF" tofile="${artifact.temp.output.color_matcher}/META-INF/MANIFEST.MF"/>
     <fx:fileset id="all_but_color_matcher" dir="${artifact.temp.output.color_matcher}" includes="**/*.jar">
       <exclude name="color_matcher.jar"/>
     </fx:fileset>
