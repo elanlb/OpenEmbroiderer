@@ -69,6 +69,7 @@ public class ColorMatcher {
 				alert.setContentText("You must select colors to use. Click 'Select Colors' to access the color selector.");
 				alert.showAndWait();
 			} else {
+				ColorSelector.updateColorList();
 				ArrayList<Color> availableColors = ColorSelector.colors; // read available colors from preferences and let the user choose which ones they want
 
 				PixelReader pixelReader = startImage.getPixelReader(); // make a pixelReader

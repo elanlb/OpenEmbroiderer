@@ -9,4 +9,4 @@ A tutorial video will come soon, although it is very self explanatory. Select an
 
 The compiled JAR is available [here](https://github.com/elanlb/color-matcher/tree/master/out/artifacts/color_matcher/color_matcher.jar).
 
-To run the program you need Java installed. Everything required for the program is included by default. Download Java [here](https://java.com/en/download/).
+To run the program you need Java installed. Everything required for the program is included by default. Download Java JDK SE [here](http://www.oracle.com/technetwork/java/javase/downloads/index.html).

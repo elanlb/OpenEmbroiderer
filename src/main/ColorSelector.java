@@ -48,16 +48,13 @@ public class ColorSelector {
 
 		if (colors == null) {
 			colors = new ArrayList<>();
+			colors.add(Color.TRANSPARENT);
 		}
+	}
 
-		colorPickers.addListener(new ListChangeListener<>() {
-			@Override
-			public void onChanged (Change<? extends ColorPicker> c) {
-				IntStream.range(0, colorPickers.size()).forEach(i -> colors.add(colorPickers.get(i).getValue()));
-				colors.add(Color.TRANSPARENT);
-				System.out.println(colorPickers);
-			}
-		});
+	public static void updateColorList () {
+		IntStream.range(0, colorPickers.size()).forEach(i -> colors.add(colorPickers.get(i).getValue()));
+		System.out.println(colorPickers);
 	}
 
 	@FXML
