@@ -1,6 +1,6 @@
 package main;
 
-public class ArrayFunctions {
+class ArrayFunctions {
 	public static int min (double[] array) throws ArrayIndexOutOfBoundsException {
 		try {
 			double smallestElement = array[0];

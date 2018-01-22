@@ -1,14 +1,8 @@
 package main;
 
-import javafx.scene.paint.Color;
+class Preferences {
+	public static final int windowWidth = 800;
+	public static final int windowHeight = 600;
 
-import java.util.ArrayList;
-
-public class Preferences {
-	public static int windowWidth = 800;
-	public static int windowHeight = 600;
-
-	public static int imagePreviewSize = 200;
-
-	public ArrayList<Color> threadColors = new ArrayList<>();
+	public static final int imagePreviewSize = 200;
 }

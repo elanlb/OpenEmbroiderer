@@ -1,7 +1,6 @@
 package main;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,13 +47,15 @@ public class ColorSelector {
 
 		if (colors == null) {
 			colors = new ArrayList<>();
-			colors.add(Color.TRANSPARENT);
 		}
 	}
 
 	public static void updateColorList () {
+		colors = new ArrayList<>();
 		IntStream.range(0, colorPickers.size()).forEach(i -> colors.add(colorPickers.get(i).getValue()));
-		System.out.println(colorPickers);
+		if (!colors.contains(Color.TRANSPARENT)) {
+			colors.add(Color.TRANSPARENT);
+		}
 	}
 
 	@FXML
