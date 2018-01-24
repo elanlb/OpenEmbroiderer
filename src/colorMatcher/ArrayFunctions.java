@@ -1,4 +1,4 @@
-package main;
+package colorMatcher;
 
 class ArrayFunctions {
 	public static int min (double[] array) throws ArrayIndexOutOfBoundsException {

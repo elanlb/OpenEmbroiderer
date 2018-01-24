@@ -1,5 +1,6 @@
 package main;
 
+import colorMatcher.ColorMatcher;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ColorMatcher {
+public class ColorMatcherController {
 	private Image image;
 	private Image imageResult;
 
@@ -60,7 +61,6 @@ public class ColorMatcher {
 	@FXML
 	protected void matchColors (ActionEvent event) {
 		if (image != null) {
-			Image startImage = image;
 
 			if (ColorSelector.colors == null) { // make sure that colors are selected
 				Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -72,46 +72,9 @@ public class ColorMatcher {
 				ColorSelector.updateColorList();
 				ArrayList<Color> availableColors = ColorSelector.colors; // read available colors from preferences and let the user choose which ones they want
 
-				PixelReader pixelReader = startImage.getPixelReader(); // make a pixelReader
+				imageResult = ColorMatcher.matchColors(image, availableColors);
 
-				int width = (int) startImage.getWidth(); // get the width and height of the picture
-				int height = (int) startImage.getHeight();
-
-				WritableImage writableImage = new WritableImage(width, height);
-				PixelWriter pixelWriter = writableImage.getPixelWriter();
-
-				for (int x = 0; x < width; x++) {
-					for (int y = 0; y < height; y++) {
-						/* find the distance to each available color and then set to the closest */
-						Color currentColor = pixelReader.getColor(x, y);
-						double red = currentColor.getRed();
-						double green = currentColor.getGreen();
-						double blue = currentColor.getBlue();
-						double alpha = currentColor.getOpacity();
-
-						double[] distances = new double[availableColors.size()]; // distances to each color based on the index
-
-						for (int i = 0; i < availableColors.size(); i++) {
-							double distance = Math.sqrt(
-									Math.pow(availableColors.get(i).getRed() - red, 2) +
-											Math.pow(availableColors.get(i).getGreen() - green, 2) +
-											Math.pow(availableColors.get(i).getBlue() - blue, 2) +
-											Math.pow(availableColors.get(i).getOpacity() - alpha, 2)
-							); // pythagorean theorem in 3d
-
-							distances[i] = distance; // set the distance of each color in the same order the colors came in
-						}
-
-						/* get the index of the smallest distance and then get the color from the availableColors array */
-						int index = ArrayFunctions.min(distances);
-
-						pixelWriter.setColor(x, y, availableColors.get(index));
-					}
-				}
-
-				imageResult = writableImage;
-
-				imageResultView.setImage(writableImage);
+				imageResultView.setImage(imageResult);
 				imageResultView.setFitHeight(Preferences.imagePreviewSize);
 				imageResultView.setPreserveRatio(true);
 			}
