@@ -7,7 +7,7 @@ A tutorial video will come soon, although it is very self explanatory. Select an
 
 **Download**
 
-The compiled JAR is available [here](https://github.com/elanlb/color-matcher/tree/master/out/artifacts/color_matcher/color_matcher.jar).
+The compiled JAR is available [here](https://github.com/elanlb/color-matcher/tree/master/builds/color_matcher.jar).
 
 To run the program you need Java JDK ≥ 8 installed. Everything required for the program is included by default. Download Java JDK SE [here](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 
