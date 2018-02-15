@@ -1,4 +1,7 @@
 # Color Matcher
+
+[![Build Status](https://travis-ci.org/elanlb/color-matcher.svg?branch=master)](https://travis-ci.org/elanlb/color-matcher)
+
 JavaFX based program to reduce the colors in an image.
 
 **How to Use**
