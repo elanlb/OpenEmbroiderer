@@ -1,7 +1,2 @@
 language: java
-<<<<<<< HEAD
 install: ant deps
-=======
-install: ant deps
-script: ant -buildfile Color Matcher.xml
->>>>>>> b96ecd554646b223d16c32cbca96fbec560d4f90
