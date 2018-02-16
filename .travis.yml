@@ -1,2 +1,8 @@
 language: java
-install: ant deps
+sudo: required
+before_install:
+- sudo apt-get update
+install:
+- sudo apt-get -qq update
+- sudo apt-get install ant
+script: ant
