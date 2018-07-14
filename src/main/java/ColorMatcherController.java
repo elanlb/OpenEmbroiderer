@@ -1,4 +1,4 @@
-package main;
+package main.java;
 
 import colorMatcher.ColorMatcher;
 import javafx.embed.swing.SwingFXUtils;

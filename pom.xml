@@ -1,7 +1,11 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.elan.app</groupId>
-    <artifactId>main</artifactId>
-    <version>1</version>
+
+    <groupId>com.elanlb.color-matcher</groupId>
+    <artifactId>color-matcher</artifactId>
+    <version>1.0</version>
     <packaging>pom</packaging>
+
+    <name>color-matcher</name>
+    <description>JavaFX based program to reduce the colors in an image</description>
 </project>

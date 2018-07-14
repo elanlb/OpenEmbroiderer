@@ -6,7 +6,7 @@
 
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="main.ColorSelector"
+          fx:controller="main.java.ColorSelector"
           stylesheets="@css/stylesheet.css">
 
     <Button text="Close Window" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#closeWindow"/>

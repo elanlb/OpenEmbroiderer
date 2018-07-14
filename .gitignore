@@ -1,3 +1,6 @@
-/.idea
-/out
+.idea
+
+out
+target
+
 .DS_Store

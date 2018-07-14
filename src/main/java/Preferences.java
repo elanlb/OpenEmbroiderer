@@ -1,4 +1,4 @@
-package main;
+package main.java;
 
 class Preferences {
 	public static final int windowWidth = 800;

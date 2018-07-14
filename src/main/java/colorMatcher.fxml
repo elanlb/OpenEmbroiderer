@@ -6,7 +6,7 @@
 
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="main.ColorMatcherController"
+          fx:controller="main.java.ColorMatcherController"
           stylesheets="@css/stylesheet.css">
 
     <Button text="Main Menu" GridPane.columnIndex="0" GridPane.rowIndex="0" onAction="#mainMenu"/>
